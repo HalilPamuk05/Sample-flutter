@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:newapp/ilksayfam.dart';
+import 'package:newapp/first_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,11 +10,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-final _userName = 'Admin', _password = 'Admin';
-String kullaniciAdi1 = '', Sifre1 = '';
-
-final _formKey = GlobalKey<FormState>();
+  final _userName = 'Admin', _password = 'Admin';
+  String userName1 = '', password1 = '';
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +31,12 @@ final _formKey = GlobalKey<FormState>();
                     fontFamily: 'ZenDots',
                     fontSize: 50,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold),),
+                    fontWeight: FontWeight.bold),
+              ),
               SizedBox(
                 height: 20,
               ),
-        
+
               //Username TextField
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -49,23 +48,23 @@ final _formKey = GlobalKey<FormState>();
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextFormField(
-                      onSaved: (kullaniciAdi) {
-                        kullaniciAdi1 = kullaniciAdi!;
+                      onSaved: (userName) {
+                        userName1 = userName!;
                       },
-                      validator: (kullaniciAdi) {
-                        if(kullaniciAdi!.length <= 4){
+                      validator: (userName) {
+                        if (userName!.length <= 4) {
                           return 'Kullanıcı en az 4 karakterli olmalıdır.';
-                        }
-                        else{
+                        } else {
                           return null;
                         }
                       },
                       decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Username',
-                          hintStyle: TextStyle(
-                              color: Color(0xff8D72E1),
-                              fontWeight: FontWeight.bold)), 
+                        border: InputBorder.none,
+                        hintText: 'Username',
+                        hintStyle: TextStyle(
+                            color: Color(0xff8D72E1),
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
@@ -73,7 +72,7 @@ final _formKey = GlobalKey<FormState>();
               SizedBox(
                 height: 20,
               ),
-        
+
               //Password TextField
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -85,14 +84,13 @@ final _formKey = GlobalKey<FormState>();
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextFormField(
-                      onSaved: (sifre) {
-                        Sifre1 = sifre!; 
+                      onSaved: (password) {
+                        password1 = password!;
                       },
-                      validator: (sifre) {
-                        if(sifre!.length <= 4){
+                      validator: (password) {
+                        if (password!.length <= 4) {
                           return 'Şifre en az 4 Karakterli olmalıdır';
-                        }
-                        else{
+                        } else {
                           return null;
                         }
                       },
@@ -110,7 +108,7 @@ final _formKey = GlobalKey<FormState>();
               SizedBox(
                 height: 20,
               ),
-        
+
               // Login button
               Container(
                 width: 360,
@@ -118,26 +116,35 @@ final _formKey = GlobalKey<FormState>();
                 child: ElevatedButton(
                   onPressed: () {
                     bool _valitade = _formKey.currentState!.validate();
-                        if( _valitade){
-                         _formKey.currentState!.save();
-                            if(kullaniciAdi1 == _userName && Sifre1 == _password){
-                              Navigator.push(context, CupertinoPageRoute(builder:(FirstPagecontext) => FirstPage(), ));
-                        }
-                            else{
-                              print('Login işlemi Başarısız.');
-                        }
-                         }                  
-                  }, 
-                  child: Text('LOGIN', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),),
-                  style: ElevatedButton.styleFrom(primary: Colors.white, 
-                  onPrimary: Color(0xff8D72E1),
-                  side: BorderSide(width: 2, color: Color(0xff8D72E1), 
-                  strokeAlign: StrokeAlign.inside), 
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  )),
+                    if (_valitade) {
+                      _formKey.currentState!.save();
+                      if (userName1 == _userName && password1 == _password) {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (FirstPagecontext) => FirstPage(),
+                            ));
+                      } else {
+                        print('Login işlemi Başarısız.');
+                      }
+                    }
+                  },
+                  child: Text(
+                    'LOGIN',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
                   ),
-              ),    
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      onPrimary: Color(0xff8D72E1),
+                      side: BorderSide(
+                          width: 2,
+                          color: Color(0xff8D72E1),
+                          strokeAlign: StrokeAlign.inside),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      )),
+                ),
+              ),
               Container(
                   child: TextButton(
                       onPressed: () {},

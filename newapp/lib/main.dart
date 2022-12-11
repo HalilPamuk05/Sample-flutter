@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:newapp/LoginPage.dart';
+import 'package:newapp/login_page.dart';
 
 void main(List<String> args) {
   runApp(NewApp());
-
 }
 
 class NewApp extends StatelessWidget {
