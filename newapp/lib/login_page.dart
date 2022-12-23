@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newapp/first_page.dart';
+import 'package:newapp/sign_in.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,8 +24,21 @@ class _LoginPageState extends State<LoginPage> {
         child: Form(
           key: _formKey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Flexible(
+                child: Container(
+                  width: 250,
+                  height: 250,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          'https://www.pngall.com/wp-content/uploads/5/Alarm-PNG-HD-Image.png'),
+                      alignment: Alignment.center,
+                    ),
+                  ),
+                ),
+              ),
               //Welcome
               Text(
                 'Welcome',
@@ -33,9 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
 
               //Username TextField
               Padding(
@@ -69,9 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
 
               //Password TextField
               Padding(
@@ -89,25 +100,24 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       validator: (password) {
                         if (password!.length <= 4) {
-                          return 'Şifre en az 4 Karakterli olmalıdır';
+                          return 'Kullanıcı Adı veya Şifre Hatalı.';
                         } else {
                           return null;
                         }
                       },
                       obscureText: true,
                       decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Password',
-                          hintStyle: TextStyle(
-                              color: Color(0xff8D72E1),
-                              fontWeight: FontWeight.bold)),
+                        border: InputBorder.none,
+                        hintText: 'Password',
+                        hintStyle: TextStyle(
+                            color: Color(0xff8D72E1),
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
 
               // Login button
               Container(
@@ -119,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (_valitade) {
                       _formKey.currentState!.save();
                       if (userName1 == _userName && password1 == _password) {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             CupertinoPageRoute(
                               builder: (FirstPagecontext) => FirstPage(),
@@ -134,24 +144,47 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
                   ),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Color(0xff8D72E1),
-                      side: BorderSide(
-                          width: 2,
-                          color: Color(0xff8D72E1),
-                          strokeAlign: StrokeAlign.inside),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      )),
+                    primary: Colors.white,
+                    onPrimary: Color(0xff8D72E1),
+                    side: BorderSide(
+                        width: 2,
+                        color: Color(0xff8D72E1),
+                        strokeAlign: StrokeAlign.inside),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
                 ),
               ),
-              Container(
-                  child: TextButton(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            CupertinoPageRoute(builder: (context) => SingIn()));
+                      },
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: Text('/', style: TextStyle(color: Colors.white)),
+                  ),
+                  Container(
+                    child: TextButton(
                       onPressed: () {},
                       child: Text(
                         'Forgot your password?',
                         style: TextStyle(color: Colors.white),
-                      ))),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
